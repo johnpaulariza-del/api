@@ -1,0 +1,688 @@
+{
+  "info": {
+    "_postman_id": "fintech-api-collection",
+    "name": "Fintech API Testing",
+    "description": "Comprehensive API testing collection for Fintech application with successful and failed transactions, product searches, and transaction history queries.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Setup - Create Accounts",
+      "item": [
+        {
+          "name": "Create Account 1 (ACC001 with 5000 balance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_number\": \"ACC001\",\n  \"balance\": 5000\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/accounts/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "accounts",
+                ""
+              ]
+            },
+            "description": "Create first account with 5000 balance for testing"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Account 2 (ACC002 with 3000 balance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_number\": \"ACC002\",\n  \"balance\": 3000\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/accounts/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "accounts",
+                ""
+              ]
+            },
+            "description": "Create second account with 3000 balance for testing"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Account 3 (ACC003 with 10000 balance)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"account_number\": \"ACC003\",\n  \"balance\": 10000\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/accounts/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "accounts",
+                ""
+              ]
+            },
+            "description": "Create third account with 10000 balance for testing"
+          },
+          "response": []
+        }
+      ],
+      "description": "Create test accounts before running transaction tests"
+    },
+    {
+      "name": "Read Operations",
+      "item": [
+        {
+          "name": "Get All Accounts",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/accounts/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "accounts",
+                ""
+              ]
+            },
+            "description": "Retrieve all accounts with their current balances"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Transactions",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ]
+            },
+            "description": "Retrieve all transactions in the system"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Products",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Retrieve all products in the catalog"
+          },
+          "response": []
+        }
+      ],
+      "description": "Read operations to retrieve data from the API"
+    },
+    {
+      "name": "Transactions - Successful",
+      "item": [
+        {
+          "name": "Successful Transaction - Transfer 500 from ACC001 to ACC002",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_account\": 1,\n  \"to_account\": 2,\n  \"amount\": 500\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ]
+            },
+            "description": "Transfer 500 from Account 1 (ACC001: 5000 balance) to Account 2 (ACC002: 3000 balance). This should succeed. Expected: ACC001 becomes 4500, ACC002 becomes 3500"
+          },
+          "response": []
+        },
+        {
+          "name": "Successful Transaction - Transfer 1000 from ACC003 to ACC001",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_account\": 3,\n  \"to_account\": 1,\n  \"amount\": 1000\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ]
+            },
+            "description": "Transfer 1000 from Account 3 (ACC003: 10000 balance) to Account 1 (ACC001: 4500 balance after previous transaction). This should succeed. Expected: ACC003 becomes 9000, ACC001 becomes 5500"
+          },
+          "response": []
+        }
+      ],
+      "description": "Successful transaction tests that demonstrate correct balance updates"
+    },
+    {
+      "name": "Transactions - Failed",
+      "item": [
+        {
+          "name": "Failed Transaction - Insufficient Balance (ACC002 has 3500, trying to send 5000)",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_account\": 2,\n  \"to_account\": 1,\n  \"amount\": 5000\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ]
+            },
+            "description": "Attempt to transfer 5000 from Account 2 (ACC002) which only has 3500 balance. This should FAIL with insufficient balance error. Balances should remain unchanged."
+          },
+          "response": []
+        },
+        {
+          "name": "Failed Transaction - Negative Amount",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"from_account\": 1,\n  \"to_account\": 2,\n  \"amount\": -100\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ]
+            },
+            "description": "Attempt to transfer negative amount (-100). This should FAIL with validation error. Balances should remain unchanged."
+          },
+          "response": []
+        }
+      ],
+      "description": "Failed transaction tests that demonstrate error handling and validation"
+    },
+    {
+      "name": "Products Management",
+      "item": [
+        {
+          "name": "Create Product - Laptop",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Dell XPS 13 Laptop\",\n  \"description\": \"High-performance laptop with Intel i7 processor and 16GB RAM\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Create a laptop product"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product - Wireless Earbuds",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sony WF-1000XM5 Wireless Earbuds\",\n  \"description\": \"Premium wireless earbuds with noise cancellation and 8-hour battery life\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Create wireless earbuds product"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product - iPhone 15 Pro",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"iPhone 15 Pro Max\",\n  \"description\": \"Latest Apple smartphone with A17 Pro chip and advanced camera system\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Create iPhone product"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Product - Samsung Monitor",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Samsung 4K USB-C Monitor\",\n  \"description\": \"High-resolution 4K monitor with USB-C connectivity for laptop charging\"\n}"
+            },
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ]
+            },
+            "description": "Create monitor product"
+          },
+          "response": []
+        }
+      ],
+      "description": "Product management operations"
+    },
+    {
+      "name": "Search - Products",
+      "item": [
+        {
+          "name": "Search Products - Query 1: 'laptop'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/?search=laptop",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "laptop"
+                }
+              ]
+            },
+            "description": "Search for products containing 'laptop' keyword. Should return Dell XPS 13 Laptop and related products."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products - Query 2: 'wireless'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/?search=wireless",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "wireless"
+                }
+              ]
+            },
+            "description": "Search for products containing 'wireless' keyword. Should return Sony WF-1000XM5 Wireless Earbuds and related products."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products - Query 3: 'phone'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/?search=phone",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "phone"
+                }
+              ]
+            },
+            "description": "Search for products containing 'phone' keyword. Should return iPhone 15 Pro Max and related products."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Products - Query 4: 'samsung'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/products/?search=samsung",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "products",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "samsung"
+                }
+              ]
+            },
+            "description": "Search for products containing 'samsung' keyword. Should return Samsung 4K USB-C Monitor and related products."
+          },
+          "response": []
+        }
+      ],
+      "description": "Product search queries demonstrating filter functionality"
+    },
+    {
+      "name": "Search - Transactions",
+      "item": [
+        {
+          "name": "Search Transactions - Query 1: 'ACC001'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/?search=ACC001",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "ACC001"
+                }
+              ]
+            },
+            "description": "Search transactions history for account ACC001. Should return all transactions where ACC001 is either the sender or receiver."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Transactions - Query 2: 'ACC002'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/?search=ACC002",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "ACC002"
+                }
+              ]
+            },
+            "description": "Search transactions history for account ACC002. Should return all transactions where ACC002 is either the sender or receiver."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Transactions - Query 3: 'ACC003'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/?search=ACC003",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "ACC003"
+                }
+              ]
+            },
+            "description": "Search transactions history for account ACC003. Should return all transactions where ACC003 is either the sender or receiver."
+          },
+          "response": []
+        },
+        {
+          "name": "Search Transactions - Query 4: '500'",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:8000/api/transactions/?search=500",
+              "protocol": "http",
+              "host": [
+                "127.0.0.1"
+              ],
+              "port": "8000",
+              "path": [
+                "api",
+                "transactions",
+                ""
+              ],
+              "query": [
+                {
+                  "key": "search",
+                  "value": "500"
+                }
+              ]
+            },
+            "description": "Search transactions by amount '500'. Should return transactions with amount 500."
+          },
+          "response": []
+        }
+      ],
+      "description": "Transaction history search queries demonstrating filter functionality"
+    }
+  ],
+  "auth": {
+    "type": "noauth"
+  },
+  "event": [],
+  "variable": []
+}
